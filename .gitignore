@@ -1,1 +1,3 @@
-*/bin/Debug/*
+/src/CrawlAndCollect/*/bin
+/src/CrawlAndCollect/*/obj
+_ReSharper.*
