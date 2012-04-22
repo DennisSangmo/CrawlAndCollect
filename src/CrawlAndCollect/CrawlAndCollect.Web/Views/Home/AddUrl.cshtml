@@ -1,0 +1,15 @@
+﻿@model CrawlAndCollect.Web.Controllers.Home.ViewModels.AddUrlViewModel
+
+@{
+    ViewBag.Title = "Add url to crawl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add url to crawl</h2>
+
+@using(Html.BeginForm()) {
+    @Html.LabelFor(x => x.Url)
+    @Html.TextBoxFor(x => x.Url)
+    @Html.ValidationMessageFor(x => x.Url)
+    <button type="submit">Send</button>
+}

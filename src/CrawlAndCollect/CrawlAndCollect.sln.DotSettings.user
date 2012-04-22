@@ -1,0 +1,15 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/Environment/SearchAndNavigation/MergeOccurences/@EntryValue">False</s:Boolean>
+	
+	
+	
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=F4E2BBF5A1E8441BAEEE19C08AEA541C/@KeyIndexDefined">True</s:Boolean>
+	
+	
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=F4E2BBF5A1E8441BAEEE19C08AEA541C/Name/@EntryValue">Index</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=F4E2BBF5A1E8441BAEEE19C08AEA541C/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="nUnit" Id="CrawlAndCollect.Web.Tests.Controllers.HomeControllerTest" type="NUnitTestFixtureElement" Project="9BB6FD98-A765-450B-9747-0765753B4163" /&gt;&lt;UnitTestElement Provider="nUnit" Id="CrawlAndCollect.Web.Tests.Controllers.HomeControllerTest.Index" ParentId="CrawlAndCollect.Web.Tests.Controllers.HomeControllerTest" type="NUnitTestElement" TypeName="CrawlAndCollect.Web.Tests.Controllers.HomeControllerTest" MethodName="Index" Project="9BB6FD98-A765-450B-9747-0765753B4163" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String></wpf:ResourceDictionary>

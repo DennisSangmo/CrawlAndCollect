@@ -1,0 +1,36 @@
+﻿@using CrawlAndCollect.Core.Extensions
+@model CrawlAndCollect.Web.Controllers.Log.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "CrawlAndCollect Log";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CrawlAndCollect Log</h2>
+
+@if(Model.HasLogs) {
+    <table>
+        <thead>
+            <tr>
+                <th>Raised</th>
+                <th>Level</th>
+                <th>Sender</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var row in Model.Log) {
+                <tr>
+                    <td>@row.Raised.ToDateTimeString()</td>
+                    <td>@row.LogLevel.GetDescription()</td>
+                    <td>@row.Sender.GetDescription()</td>
+                    <td>@row.Title</td>
+                    <td>@row.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>No logmessages</p>
+}
