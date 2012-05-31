@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CrawlAndCollect.Crawler.Collectors;
 using CrawlAndCollect.Crawler.Elements;

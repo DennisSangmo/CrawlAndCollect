@@ -2,6 +2,7 @@ using CrawlAndCollect.Core.Services;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Embedded;
+using Raven.Client.Indexes;
 
 namespace CrawlAndCollect.Core.Persistence.RavenDB {
     public static class SessionFactory {
@@ -9,12 +10,14 @@ namespace CrawlAndCollect.Core.Persistence.RavenDB {
         {
             var ds = new EmbeddableDocumentStore { RunInMemory = true, };
             ds.Initialize();
+            ApplyIndexes(ds);
             return ds.OpenSession();
         }
 
         public static EntityService CreateLiveSession() {
             var ds = new DocumentStore { ConnectionStringName = "RavenDBEnties" };
             ds.Initialize();
+            ApplyIndexes(ds);
             return new EntityService(ds.OpenSession());
         } 
 
@@ -22,6 +25,11 @@ namespace CrawlAndCollect.Core.Persistence.RavenDB {
             var ds = new DocumentStore { ConnectionStringName = "RavenDBLog" };
             ds.Initialize();
             return new LogService(ds.OpenSession());
-        } 
+        }
+
+        private static void ApplyIndexes(IDocumentStore documentStore)
+        {
+            IndexCreation.CreateIndexes(typeof(SessionFactory).Assembly, documentStore);
+        }
     }
 }

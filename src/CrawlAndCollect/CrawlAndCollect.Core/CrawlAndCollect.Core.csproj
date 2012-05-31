@@ -115,15 +115,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bs\LinkValidator\LinkValidator.cs" />
     <Compile Include="Entities\Base\Entity.cs" />
     <Compile Include="Entities\BlockDomain\BlockDomain.cs" />
     <Compile Include="Entities\BlockUri\BlockUri.cs" />
+    <Compile Include="Entities\CrawledUri\CrawledUri.cs" />
     <Compile Include="Entities\Link\Link.cs" />
     <Compile Include="Entities\Log\LogLevel.cs" />
     <Compile Include="Entities\Log\LogRow.cs" />
     <Compile Include="Entities\Log\LogSender.cs" />
-    <Compile Include="Entities\Page\Page.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerationExtensions.cs" />
@@ -136,6 +135,10 @@
     <Compile Include="NserviceBus\Messages\CrawlUrlMessage.cs" />
     <Compile Include="NserviceBus\Messages\ValidateLinkMessage.cs" />
     <Compile Include="NserviceBus\UnitOfWork\MyRavenUnitOfWork.cs" />
+    <Compile Include="Persistence\RavenDB\Indexes\BlockedDomainIndex.cs" />
+    <Compile Include="Persistence\RavenDB\Indexes\BlockedUriIndex.cs" />
+    <Compile Include="Persistence\RavenDB\Indexes\CrawledUriIndex.cs" />
+    <Compile Include="Persistence\RavenDB\Indexes\LinkPageIndex.cs" />
     <Compile Include="Persistence\RavenDB\SessionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EntityService.cs" />
@@ -149,6 +152,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Bs\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

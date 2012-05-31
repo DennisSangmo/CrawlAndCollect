@@ -1,7 +1,8 @@
 using System;
 using CrawlAndCollect.Core.Entities.BlockUri;
+using CrawlAndCollect.Core.Entities.CrawledUri;
 using CrawlAndCollect.Core.Entities.Link;
-using CrawlAndCollect.Core.Entities.Page;
+using CrawlAndCollect.Core.Persistence.RavenDB.Indexes;
 using Raven.Client;
 using System.Linq;
 using CrawlAndCollect.Core.Extensions;
@@ -12,34 +13,28 @@ namespace CrawlAndCollect.Core.Services {
             Session = session;
         }
 
-        public Page GetPage(Uri pageUri) {
-            var page = Session.Query<Page>().SingleOrDefault(x => x.Uri == pageUri);
-            if (page != null) {
-                page.Links = Session.Query<Link>().Where(x => x.PageId == page.Id);
-            }
-            return page;
-        }
-
-        public Link StoreLink(Guid pageId, string text, Uri href, bool noFollow) {
-            var link = new Link(pageId, text, href, noFollow);
+        public Link StoreLink(Uri page, string text, Uri href, bool noFollow) {
+            var link = new Link(page, text, href, noFollow);
             Session.Store(link);
             return link;
         }
 
-        public Page StorePage(Uri pageUrl) {
-            var page = new Page(pageUrl);
-            Session.Store(page);
-            return page;
-        }
-
-        public bool IsUriBlocked(Uri uri) {
+        public bool IsPageBlocked(Uri uri) {
             var domain = uri.DomainAndTopDomainWitoutWww();
-            return Session.Query<BlockUri>().Any(x => x.Uri == uri) || 
-                   Session.Query<BlockDomain>().Any(x => x.Domain == domain);
+            return Session.Query<BlockUri, BlockedUriIndex>().Any(x => x.Uri == uri) || 
+                   Session.Query<BlockDomain, BlockedDomainIndex>().Any(x => x.Domain == domain);
         }
 
         public void SaveBlockUrl(BlockUri blockUri) {
             Session.Store(blockUri);
+        }
+
+        public bool IsPageCrawled(Uri linkHref) {
+            return Session.Query<CrawledUri, CrawledUriIndex>().Any(x => x.Uri == linkHref);
+        }
+
+        public void AddCrawledUri(Uri uri) {
+            Session.Store(new CrawledUri(uri));
         }
     }
 }
