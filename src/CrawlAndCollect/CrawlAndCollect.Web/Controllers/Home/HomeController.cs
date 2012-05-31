@@ -1,7 +1,8 @@
 using System;
 using System.Web.Mvc;
-using CrawlAndCollect.Core.Entities.PageUrl;
+using CrawlAndCollect.Core.Entities.Page;
 using CrawlAndCollect.Core.NserviceBus.Messages;
+using CrawlAndCollect.Core.Services;
 using CrawlAndCollect.Web.Controllers.Home.ViewModels;
 using NServiceBus;
 
@@ -9,9 +10,11 @@ namespace CrawlAndCollect.Web.Controllers.Home
 {
     public class HomeController : Controller
     {
+        private readonly EntityService _entityService;
         private readonly IBus _bus;
 
-        public HomeController(IBus bus) {
+        public HomeController(EntityService entityService, IBus bus) {
+            _entityService = entityService;
             _bus = bus;
         }
 
@@ -31,9 +34,11 @@ namespace CrawlAndCollect.Web.Controllers.Home
 
             // TODO Validate url
             
-            var url = new PageUrl(new Uri(model.Url));
+            var page = new Page(new Uri(model.Url));
 
-            _bus.Send(new CrawlUrlMessage(url));
+            _entityService.Session.Store(page);
+
+            _bus.Send(new CrawlUrlMessage(page.Uri));
 
             return RedirectToAction("AddUrl");
         }

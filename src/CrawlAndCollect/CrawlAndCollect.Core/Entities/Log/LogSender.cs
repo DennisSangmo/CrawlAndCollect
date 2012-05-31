@@ -3,6 +3,8 @@
 namespace CrawlAndCollect.Core.Entities.Log {
     public enum LogSender {
         [Description("CrawlerEndPoint")]
-        CrawlerEndPoint = 1
+        CrawlerEndPoint = 1,
+        [Description("LinkValidatorEndpoint")]
+        LinkValidatorEndpoint
     }
 }
