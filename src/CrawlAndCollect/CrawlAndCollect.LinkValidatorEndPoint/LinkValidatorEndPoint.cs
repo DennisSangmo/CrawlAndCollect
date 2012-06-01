@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Transactions;
 using CrawlAndCollect.Core.NserviceBus.Messages;
-using CrawlAndCollect.Core.Persistence.RavenDB;
 using CrawlAndCollect.Core.Services;
 using NServiceBus;
 
@@ -13,8 +12,8 @@ namespace CrawlAndCollect.LinkValidatorEndPoint {
 
         public string[] ValidTopDomains = new[] { "se", "nu" };
 
-        public LinkValidatorEndPoint() {
-            _entityService = SessionFactory.CreateLiveSession();
+        public LinkValidatorEndPoint(EntityService entityService) {
+            _entityService = entityService;
         }
 
         public void Handle(ValidateLinkMessage message) {
@@ -24,7 +23,6 @@ namespace CrawlAndCollect.LinkValidatorEndPoint {
                 if (ValidateUri(message.Href))
                     Bus.Send(new CrawlUrlMessage(message.Href));
 
-                _entityService.Save();
                 transaction.Complete();
             }
         }

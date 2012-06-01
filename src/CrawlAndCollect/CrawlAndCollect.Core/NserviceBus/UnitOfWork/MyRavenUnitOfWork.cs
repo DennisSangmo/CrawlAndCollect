@@ -1,17 +1,21 @@
 using System;
-using CrawlAndCollect.Core.Services;
 using NServiceBus.UnitOfWork;
-
-//Not needed anymore atm
+using Raven.Client;
 
 namespace CrawlAndCollect.Core.NserviceBus.UnitOfWork {
     public class MyRavenUnitOfWork : IManageUnitsOfWork{
+        private readonly IDocumentSession _session;
+
+        public MyRavenUnitOfWork(IDocumentSession session) {
+            _session = session;
+        }
 
         public void Begin() {
         }
 
         public void End(Exception ex = null) {
             if(ex == null) {
+                _session.SaveChanges();
             }
         }
     }

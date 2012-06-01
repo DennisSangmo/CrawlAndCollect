@@ -1,4 +1,5 @@
-﻿using NServiceBus;
+﻿using CrawlAndCollect.Core.IoC;
+using NServiceBus;
 
 namespace CrawlAndCollect.LinkValidatorEndPoint
 {
@@ -8,6 +9,7 @@ namespace CrawlAndCollect.LinkValidatorEndPoint
         {
             Configure.With()
                      .DefaultBuilder()
+                     .StructureMapBuilder(CrawlAndCollectContainer.GetEndPointContainer())
                      .XmlSerializer()
                      .Log4Net()
                      .MsmqTransport()

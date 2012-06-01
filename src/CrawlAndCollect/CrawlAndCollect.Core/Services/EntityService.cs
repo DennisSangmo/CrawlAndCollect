@@ -1,14 +1,17 @@
 using System;
+using System.Collections.Generic;
 using CrawlAndCollect.Core.Entities.BlockUri;
 using CrawlAndCollect.Core.Entities.CrawledUri;
 using CrawlAndCollect.Core.Entities.Link;
+using CrawlAndCollect.Core.Entities.Log;
 using CrawlAndCollect.Core.Persistence.RavenDB.Indexes;
 using Raven.Client;
 using System.Linq;
 using CrawlAndCollect.Core.Extensions;
 
 namespace CrawlAndCollect.Core.Services {
-    public class EntityService : SessionService {
+    public class EntityService {
+        public IDocumentSession Session { get; set; }
         public EntityService(IDocumentSession session) {
             Session = session;
         }
@@ -35,6 +38,16 @@ namespace CrawlAndCollect.Core.Services {
 
         public void AddCrawledUri(Uri uri) {
             Session.Store(new CrawledUri(uri));
+        }
+
+        public void StoreLog(IEnumerable<LogRow> log)
+        {
+            log.Each(Session.Store);
+        }
+
+        public IEnumerable<LogRow> GetLog()
+        {
+            return Session.Query<LogRow>();
         }
     }
 }

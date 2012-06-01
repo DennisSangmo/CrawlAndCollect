@@ -4,14 +4,14 @@ using CrawlAndCollect.Web.Controllers.Log.ViewModels;
 
 namespace CrawlAndCollect.Web.Controllers.Log {
     public class LogController : Controller {
-        public LogService LogService { get; set; }
+        private readonly EntityService _entityService;
 
-        public LogController(LogService logService) {
-            LogService = logService;
+        public LogController(EntityService entityService) {
+            _entityService = entityService;
         }
 
         public ActionResult Index() {
-            var log = LogService.GetAll();
+            var log = _entityService.GetLog();
 
             return View(new IndexViewModel(log));
         }

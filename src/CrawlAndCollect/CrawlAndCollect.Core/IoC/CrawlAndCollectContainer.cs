@@ -1,9 +1,7 @@
 ﻿using System.Web.Mvc;
 using CrawlAndCollect.Core.IoC.Registries;
 using CrawlAndCollect.Core.NserviceBus.UnitOfWork;
-using CrawlAndCollect.Core.Persistence.RavenDB;
 using NServiceBus;
-using NServiceBus.Persistence.Raven;
 using NServiceBus.UnitOfWork;
 using StructureMap;
 

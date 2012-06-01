@@ -11,12 +11,10 @@ namespace CrawlAndCollect.CrawlerEndPoint
     public class CrawlerEndPoint : IHandleMessages<CrawlUrlMessage>
     {
         private readonly EntityService _entityService;
-        private readonly LogService _logService;
         public IBus Bus { get; set; }
 
-        public CrawlerEndPoint(EntityService entityService, LogService logService) {
+        public CrawlerEndPoint(EntityService entityService) {
             _entityService = entityService;
-            _logService = logService;
         }
 
         public void Handle(CrawlUrlMessage message) {
@@ -27,15 +25,13 @@ namespace CrawlAndCollect.CrawlerEndPoint
             using (var transaction = new TransactionScope()) {
                 // Save Crawlerlog to common log
                 var log = crawler.Log.GetLog().Select(x => new LogRow(x.Raised, LogLevel.Warning, LogSender.CrawlerEndPoint, x.Title, x.Description));
-                _logService.Store(log);
-                _logService.Save();
+                _entityService.StoreLog(log);
 
                 // Send link for validation
                 var links = linkCollector.AllLinks.Select(x => new ValidateLinkMessage(message.PageUrl, x.Text, x.Href, x.NoFollow));
                 links.Each(x => Bus.Send(x));
 
                 _entityService.AddCrawledUri(message.PageUrl);
-                _entityService.Save();
                 transaction.Complete();
             }
         }
