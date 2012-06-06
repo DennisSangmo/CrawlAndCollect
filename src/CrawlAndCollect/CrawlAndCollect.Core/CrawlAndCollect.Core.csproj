@@ -133,6 +133,7 @@
     <Compile Include="IoC\StructureMapControllerActivator.cs" />
     <Compile Include="IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="NserviceBus\Messages\CrawlUrlMessage.cs" />
+    <Compile Include="NserviceBus\Messages\RequestUriCrawlMessage.cs" />
     <Compile Include="NserviceBus\Messages\ValidateLinkMessage.cs" />
     <Compile Include="NserviceBus\UnitOfWork\MyRavenUnitOfWork.cs" />
     <Compile Include="Persistence\RavenDB\Indexes\BlockedDomainIndex.cs" />

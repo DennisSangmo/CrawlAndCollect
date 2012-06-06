@@ -1,7 +1,11 @@
-﻿@{
+﻿@model CrawlAndCollect.Web.Controllers.Home.ViewModels.IndexViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-<p>
-</p>
+<h2>Last crawled</h2>
+<p>@Model.LastCrawled.Uri</p>
+
+<h3>Crawled pages: @Model.Pages</h3>
+<h3>Indexed links: @Model.Links</h3>
 

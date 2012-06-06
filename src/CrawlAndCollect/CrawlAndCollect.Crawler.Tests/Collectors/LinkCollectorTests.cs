@@ -127,5 +127,21 @@ namespace CrawlAndCollect.Crawler.Tests.Collectors {
              Assert.AreEqual("Href not valid Uri", log[0].Title);
          }
 
+        [Test]
+         public void Should_ignore_hash_tags()
+         {
+             // ASSIGN
+             var html = "<html><head></head><body><a href=\"#\">link</a></body></html>";
+             var linkCollector = CreateLinkCollector("http://dennissangmo.se", html);
+
+             // ACT
+             var links = linkCollector.AllLinks;
+             var log = linkCollector.Log.GetLog().ToList();
+
+             // ASSERT
+            Assert.AreEqual(0, links.Count);
+            Assert.AreEqual(0, log.Count);
+        }
+
     }
 }

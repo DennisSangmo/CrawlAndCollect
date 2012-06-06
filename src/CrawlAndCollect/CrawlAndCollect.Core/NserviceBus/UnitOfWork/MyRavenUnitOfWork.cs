@@ -15,7 +15,7 @@ namespace CrawlAndCollect.Core.NserviceBus.UnitOfWork {
 
         public void End(Exception ex = null) {
             if(ex == null) {
-                _session.SaveChanges();
+                //_session.SaveChanges();
             }
         }
     }

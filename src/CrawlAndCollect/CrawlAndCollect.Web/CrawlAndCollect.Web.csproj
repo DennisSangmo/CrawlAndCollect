@@ -95,6 +95,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Home\ViewModels\AddUrlViewModel.cs" />
+    <Compile Include="Controllers\Home\ViewModels\IndexViewModel.cs" />
     <Compile Include="Controllers\Log\LogController.cs" />
     <Compile Include="Controllers\Log\ViewModels\IndexViewModel.cs" />
     <Compile Include="Global.asax.cs">

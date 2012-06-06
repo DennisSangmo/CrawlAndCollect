@@ -56,6 +56,8 @@ namespace CrawlAndCollect.Crawler.Collectors {
                 Uri hrefUri;
                 if (!Uri.TryCreate(href, UriKind.Absolute, out hrefUri))
                 {
+                    if(IgnoreLogging(href))
+                        continue;
                     Log.Log("Href not valid Uri", "Failed to parse href to uri. Href: " + href);
                     continue;
                 }
@@ -66,10 +68,25 @@ namespace CrawlAndCollect.Crawler.Collectors {
             }
         }
 
+        /// <summary>
+        /// If Href cant be parsed as uri this methos determens if its still worth logging
+        /// </summary>
+        /// <param name="href">The "href" wich could not be parsed</param>
+        private bool IgnoreLogging(string href) {
+            return string.IsNullOrWhiteSpace(href) ||
+                   href.Trim() == "#";
+        }
+
+        /// <summary>
+        /// Returns the domain and topdomain without www
+        /// </summary>
         internal static string GetDomain(string host) {
             return host.StartsWith("www.") ? host.Substring(4) : host;
         }
 
+        /// <summary>
+        /// Applies the host domain if the link is an internal
+        /// </summary>
         internal static string AddHostIfRelative(string link, Uri host)
         {
             if (link.StartsWith("/"))
