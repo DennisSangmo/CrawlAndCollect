@@ -115,6 +115,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bs\LinkValidator.cs" />
     <Compile Include="Entities\Base\Entity.cs" />
     <Compile Include="Entities\BlockDomain\BlockDomain.cs" />
     <Compile Include="Entities\BlockUri\BlockUri.cs" />
@@ -151,7 +152,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bs\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
